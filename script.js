@@ -36,6 +36,7 @@ function flipCard(card, index) {
     return;
   }
 
+  startTimer();
   card.classList.add("flipped");
   card.style.backgroundImage = `url(${shuffledImages[index]})`;
   flippedCards.push(card);
@@ -53,9 +54,10 @@ function checkMatch() {
     flippedCards = [];
 
     if (matchedCards.length === cards.length) {
+      stopTimer();
       setTimeout(() => {
-        alert("wygrałeś!!!");
-      }, 1000);
+        alert(`wygrałeś!!! Czas: ${time} sekund`);
+      });
     }
   } else {
     setTimeout(() => {
@@ -66,4 +68,23 @@ function checkMatch() {
       flippedCards = [];
     }, 1000);
   }
+}
+
+let time = 0;
+let timer;
+let gameStarted = false;
+const timerDisplay = document.getElementById("timer");
+
+function startTimer() {
+  if (!gameStarted) {
+    gameStarted = true;
+    timer = setInterval(() => {
+      time++;
+      timerDisplay.textContent = `Czas : ${time}`;
+    }, 1000);
+  }
+}
+
+function stopTimer() {
+  clearInterval(timer);
 }
