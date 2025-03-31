@@ -55,6 +55,7 @@ function checkMatch() {
 
     if (matchedCards.length === cards.length) {
       stopTimer();
+      timerDisplay.style.opacity = 0;
       setTimeout(() => {
         alert(`wygrałeś!!! Czas: ${time} sekund`);
       });
